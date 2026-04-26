@@ -86,6 +86,17 @@
         .third-icon img:hover {
             transform: scale(1.1);
         }
+        /* 切换登录/注册 */
+        .switch-btn {
+            text-align: center;
+            margin-top: 10px;
+            color: #2c7a2c;
+            cursor: pointer;
+        }
+        /* 注册表单默认隐藏 */
+        .register-form {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -216,52 +227,118 @@
     <a href="#" class="back-top">回到顶部</a>
 
 
-    <!-- ========== 新增：登录弹窗表单 ========== -->
+    <!-- ========== 新增：登录+注册弹窗表单 ========== -->
     <div class="login-mask" id="loginMask">
         <div class="login-box">
             <span class="close-btn" id="closeLogin">×</span>
-            <h3>用户登录</h3>
-            <!-- 登录表单，正规提交按钮 -->
-            <form action="" method="post">
-                <input type="text" name="username" placeholder="请输入账号" required>
-                <input type="password" name="pwd" placeholder="请输入密码" required>
-                <input type="submit" value="立即登录" class="sub-btn">
-            </form>
+            
+            <!-- 登录表单 -->
+            <div class="login-form" id="loginForm">
+                <h3>用户登录</h3>
+                <form id="loginFormEle">
+                    <input type="text" name="username" placeholder="请输入账号" required>
+                    <input type="password" name="pwd" placeholder="请输入密码" required>
+                    <input type="submit" value="立即登录" class="sub-btn">
+                </form>
+                <p class="switch-btn" id="toRegister">没有账号？去注册</p>
+
                 <!-- 第三方登录 -->
-    <div class="third-login">
-        <p>其他登录方式：</p>
-        <div class="third-icons">
-            <a href="javascript:;" class="third-icon wechat" title="微信登录">
-                <img src="img/wx.jpg" alt="微信">
-            </a>
-            <a href="javascript:;" class="third-icon alipay" title="支付宝登录">
-                <img src="img/zfb.jpg" alt="支付宝">
-            </a>
-            <a href="javascript:;" class="third-icon qq" title="QQ登录">
-                <img src="img/QQ.jpg" alt="QQ">
-            </a>
-        
-     </div>
-    </div>
+                <div class="third-login">
+                    <p>其他登录方式：</p>
+                    <div class="third-icons">
+                        <a href="javascript:;" class="third-icon wechat" title="微信登录">
+                            <img src="img/wx.jpg" alt="微信">
+                        </a>
+                        <a href="javascript:;" class="third-icon alipay" title="支付宝登录">
+                            <img src="img/zfb.jpg" alt="支付宝">
+                        </a>
+                        <a href="javascript:;" class="third-icon qq" title="QQ登录">
+                            <img src="img/QQ.jpg" alt="QQ">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 注册表单（默认隐藏） -->
+            <div class="register-form" id="registerForm">
+                <h3>用户注册</h3>
+                <form id="registerFormEle">
+                    <input type="text" name="username" placeholder="请设置账号" required>
+                    <input type="password" name="pwd" placeholder="请设置密码" required>
+                    <input type="password" name="repwd" placeholder="请确认密码" required>
+                    <input type="submit" value="立即注册" class="sub-btn">
+                </form>
+                <p class="switch-btn" id="toLogin">已有账号？去登录</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // 打开登录框
+        // 1. 打开/关闭弹窗
         document.getElementById('openLogin').onclick = function(){
             document.getElementById('loginMask').style.display = 'block';
         }
-        // 关闭登录框
         document.getElementById('closeLogin').onclick = function(){
             document.getElementById('loginMask').style.display = 'none';
         }
+
+        // 2. 登录/注册表单切换（显示/隐藏）
+        document.getElementById('toRegister').onclick = function(){
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+        document.getElementById('toLogin').onclick = function(){
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        // 3. 注册功能：保存用户信息到localStorage
+        document.getElementById('registerFormEle').onsubmit = function(e){
+            e.preventDefault(); // 阻止表单默认跳转
+            let username = this.username.value;
+            let pwd = this.pwd.value;
+            let repwd = this.repwd.value;
+
+            if(pwd !== repwd){
+                alert('两次密码输入不一致！');
+                return;
+            }
+            if(localStorage.getItem(username)){
+                alert('该账号已被注册！');
+                return;
+            }
+
+            // 保存账号密码到本地存储
+            localStorage.setItem(username, pwd);
+            alert('注册成功！请登录');
+            // 自动切换回登录表单
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            this.reset();
+        }
+
+        // 4. 登录功能：读取localStorage比对验证
+        document.getElementById('loginFormEle').onsubmit = function(e){
+            e.preventDefault(); // 阻止表单默认跳转
+            let username = this.username.value;
+            let pwd = this.pwd.value;
+
+            // 从本地存储读取密码
+            let savedPwd = localStorage.getItem(username);
+            if(savedPwd && savedPwd === pwd){
+                alert('登录成功！欢迎回来，' + username);
+                document.getElementById('loginMask').style.display = 'none';
+                this.reset();
+            }else{
+                alert('账号或密码错误！');
+            }
+        }
+
         // 第三方登录模拟
         document.querySelectorAll('.third-icon').forEach(icon => {
             icon.onclick = function() {
                 let type = this.title;
                 alert(`正在调用${type}...（作业模拟实现）`);
-                // 这里可以写模拟登录成功的逻辑
-                // 比如：直接关闭弹窗，提示登录成功
                 document.getElementById('loginMask').style.display = 'none';
                 alert(`${type}登录成功！`);
             }
