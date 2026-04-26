@@ -1,0 +1,234 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Microsoft Yahei", sans-serif;
+}
+
+/* 清除浮动类（核心） */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 头部样式 */
+.header {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+.logo {
+    float: left;
+    display: flex;
+    align-items: center;
+}
+.logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+.nav {
+    float: right;
+}
+.nav ul li {
+    float: left;
+    margin-left: 30px;
+}
+.nav ul li a {
+    color: #666;
+    font-size: 16px;
+}
+.nav ul li a:hover {
+    color: #2c7a2c;
+}
+
+/* 主体容器 */
+.container {
+    width: 1200px;
+    margin: 20px auto;
+}
+
+/* 左侧栏 */
+.left-sidebar {
+    float: left;
+    width: 200px;
+    padding: 15px;
+    border: 1px solid #eee;
+    position: relative; /* 相对定位：给子元素做参考 */
+}
+.left-sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+.left-sidebar ul li {
+    margin: 10px 0;
+}
+.left-sidebar ul li a {
+    color: #666;
+}
+.left-sidebar ul li a:hover {
+    color: #2c7a2c;
+}
+.float-tip {
+    position: absolute; /* 相对左侧栏定位 */
+    top: 50px;
+    right: -80px;
+    width: 80px;
+    padding: 5px;
+    background: #2c7a2c;
+    color: white;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+/* 中间主体内容 */
+.main-content {
+    float: left;
+    width: 700px;
+    margin: 0 20px;
+}
+/* 热门推荐 */
+.hot-recommend h2, .new-book h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #2c7a2c;
+    color: #333;
+}
+.book-list {
+    width: 100%;
+}
+.book-item {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    text-align: center;
+}
+.book-img {
+    width: 120px;
+    height: 160px;
+    margin-bottom: 10px;
+}
+.book-item h4 {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    height: 40px;
+    line-height: 20px;
+    overflow: hidden;
+}
+.book-item p {
+    color: #2c7a2c;
+    font-weight: bold;
+}
+/* 新书表格 */
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+.book-table th, .book-table td {
+    border: 1px solid #eee;
+    padding: 10px;
+}
+.book-table th {
+    background: #f5f5f5;
+    color: #333;
+}
+.buy-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #2c7a2c;
+    color: white;
+    border-radius: 3px;
+}
+.buy-btn:hover {
+    background: #2c7a2c;
+}
+
+/* 右侧栏 */
+.right-sidebar {
+    float: left;
+    width: 240px;
+    padding: 15px;
+    border: 1px solid #eee;
+    position: relative; /* 绝对定位参考 */
+}
+.right-sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+.promo-item {
+    margin-bottom: 15px;
+    text-align: center;
+}
+.promo-img {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 5px;
+}
+.promo-item p {
+    color: #0d0d0d;
+    font-weight: bold;
+}
+.fixed-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background: rgb(234, 242, 128);
+    color: rgba(5, 5, 5, 0.92);
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* 页脚 */
+.footer {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: #333;
+    color: white;
+    text-align: center;
+    position: fixed; /* 固定在底部 */
+    bottom: 0;
+    left: 0;
+}
+
+/* 回到顶部按钮 */
+.back-top {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    right: 50px;
+    bottom: 80px;
+    width: 100px;
+    height: 60px;
+    line-height: 60px;
+    background: #2c7a2c;
+    color: white;
+    text-align: center;
+    border-radius:50%;
+}
+.back-top:hover {
+    background: #2c7a2c;
+}
+/* 滚动后显示回到顶部（可配合JS，这里先默认显示） */
+.back-top {
+    display: block;
+}
