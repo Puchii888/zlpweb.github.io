@@ -1,31 +1,14 @@
-/* ========== 全局样式重置 & 基础盒子模型 ========== */
+/* 全局样式重置 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: "微软雅黑", sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #333;
-    background-color: #f5f6f8;
-    padding-bottom: 80px; /* 给页脚留出空间，100%显示 */
-}
-
-a {
-    text-decoration: none;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-ul {
     list-style: none;
+    text-decoration: none;
+    font-family: "Microsoft Yahei", sans-serif;
 }
 
-/* 清除浮动 */
+/* 清除浮动类（核心） */
 .clearfix::after {
     content: "";
     display: block;
@@ -36,9 +19,8 @@ ul {
 .header {
     width: 1200px;
     margin: 0 auto;
-    padding: 18px 0;
-    border-bottom: 1px solid #e8e8e8;
-    background: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
 }
 .logo {
     float: left;
@@ -46,307 +28,207 @@ ul {
     align-items: center;
 }
 .logo-img {
-    width: 52px;
-    height: 52px;
-    vertical-align: middle;
-    margin-right: 12px;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
 .logo-text {
-    font-size: 26px;
+    font-size: 20px;
     font-weight: bold;
-    color: #2c7a2c;
+    color: #333;
 }
 .nav {
     float: right;
-    margin-top: 16px;
 }
 .nav ul li {
     float: left;
-    margin-left: 35px;
+    margin-left: 30px;
 }
 .nav ul li a {
-    color: #555;
+    color: #666;
     font-size: 16px;
-    transition: all 0.3s ease;
 }
 .nav ul li a:hover {
     color: #2c7a2c;
 }
 
-/* ========== 主体容器 ========== */
+/* 主体容器 */
 .container {
     width: 1200px;
-    margin: 25px auto;
+    margin: 20px auto;
 }
 
-/* 左侧栏：图书分类 */
+/* 左侧栏 */
 .left-sidebar {
     float: left;
-    width: 190px;
-    height: 320px; /* 和轮播图等高 */
-    padding: 25px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    width: 200px;
+    padding: 15px;
+    border: 1px solid #eee;
+    position: relative; /* 相对定位：给子元素做参考 */
 }
 .left-sidebar h3 {
-    margin-bottom: 18px;
     font-size: 18px;
-    color: #2c7a2c;
-    border-bottom: 2px solid #2c7a2c;
-    padding-bottom: 6px;
+    margin-bottom: 15px;
+    color: #333;
 }
 .left-sidebar ul li {
-    margin: 14px 0;
-    font-size: 15px;
+    margin: 10px 0;
+}
+.left-sidebar ul li a {
+    color: #666;
 }
 .left-sidebar ul li a:hover {
     color: #2c7a2c;
-    padding-left: 6px;
+}
+.float-tip {
+    position: absolute; /* 相对左侧栏定位 */
+    top: 50px;
+    right: -80px;
+    width: 80px;
+    padding: 5px;
+    background: #2c7a2c;
+    color: white;
+    font-size: 12px;
+    border-radius: 3px;
 }
 
-/* 中间轮播栏（从下向上轮播动画） */
-.banner {
-    float: left;
-    width: 720px;
-    height: 320px;
-    overflow: hidden;
-    position: relative;
-    margin: 0 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.banner-wrap {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: slideUp 9s infinite linear;
-}
-.banner-wrap img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-@keyframes slideUp {
-    0%, 30% { transform: translateY(0); }
-    33%, 63% { transform: translateY(-320px); }
-    66%, 97% { transform: translateY(-640px); }
-    100% { transform: translateY(0); }
-}
-
-/* 右侧栏：促销活动（和轮播图等高） */
-.right-sidebar {
-    float: right;
-    width: 250px;
-    height: 320px; /* 和轮播图等高 */
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    position: relative;
-    overflow-y: auto; /* 内容多了可滚动 */
-}
-.right-sidebar h3 {
-    margin-bottom: 18px;
-    font-size: 18px;
-    color: #2c7a2c;
-    border-bottom: 2px solid #2c7a2c;
-    padding-bottom: 6px;
-}
-.promo-item {
-    margin-bottom: 12px;
-    text-align: center;
-}
-.promo-img {
-    width: 100%;
-    height: 110px; /* 缩小促销图高度，适应320px容器 */
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 5px;
-}
-.fixed-badge {
-    position: absolute;
-    top: 15px;
-    right: -12px;
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 6px 18px;
-    font-size: 13px;
-    border-radius: 2px;
-    transform: rotate(15deg);
-}
-
-/* 主内容区 */
+/* 中间主体内容 */
 .main-content {
     float: left;
-    width: 100%;
-    margin-top: 25px;
+    width: 700px;
+    margin: 0 20px;
 }
-
 /* 热门推荐 */
-.hot-recommend {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
-}
-.hot-recommend h2 {
+.hot-recommend h2, .new-book h2 {
     font-size: 20px;
-    color: #2c7a2c;
-    margin-bottom: 20px;
-    border-left: 5px solid #2c7a2c;
-    padding-left: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #2c7a2c;
+    color: #333;
 }
 .book-list {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    width: 100%;
 }
 .book-item {
-    flex: 1;
-    max-width: 220px;
-    margin: 0 12px;
+    float: left;
+    width: 33.33%;
+    padding: 10px;
     text-align: center;
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-.book-item:first-child {
-    margin-left: 0;
-}
-.book-item:last-child {
-    margin-right: 0;
-}
-/* ✅ 热门图书动效：悬停时右移、阴影加深、放大 */
-/* 热门图书动效：悬停时右移、阴影加深、放大 */
-.book-item:hover {
-    transform: translateX(15px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
 }
 .book-img {
     width: 120px;
     height: 160px;
-    margin-bottom: 12px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-.book-item:hover .book-img {
-    transform: scale(1.08);
-}
-.book-img {
-    width: 120px;
-    height: 160px;
-    margin-bottom: 12px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-.book-item:hover .book-img {
-    transform: scale(1.08);
+    margin-bottom: 10px;
 }
 .book-item h4 {
     font-size: 14px;
     color: #333;
-    margin-bottom: 8px;
-    height: 42px;
-    line-height: 21px;
+    margin-bottom: 5px;
+    height: 40px;
+    line-height: 20px;
     overflow: hidden;
 }
 .book-item p {
     color: #2c7a2c;
     font-weight: bold;
-    font-size: 16px;
 }
-
-/* 新书上市 */
-.new-book {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.new-book h2 {
-    font-size: 20px;
-    color: #2c7a2c;
-    margin-bottom: 20px;
-    border-left: 5px solid #2c7a2c;
-    padding-left: 12px;
-}
+/* 新书表格 */
 .book-table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
 }
-.book-table th, 
-.book-table td {
+.book-table th, .book-table td {
     border: 1px solid #eee;
-    padding: 14px;
-    font-size: 15px;
+    padding: 10px;
 }
 .book-table th {
-    background-color: #f8f9fa;
-    color: #2c7a2c;
-    font-weight: 600;
+    background: #f5f5f5;
+    color: #333;
 }
-/* ✅ 按钮动画：登录/购买按钮悬停时背景色渐变、缩放 */
 .buy-btn {
     display: inline-block;
-    padding: 6px 14px;
-    background: linear-gradient(90deg, #2c7a2c, #34a834);
+    padding: 5px 10px;
+    background: #2c7a2c;
     color: white;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.3s ease;
+    border-radius: 3px;
 }
 .buy-btn:hover {
-    background: linear-gradient(90deg, #236623, #2c7a2c);
-    transform: scale(1.05);
+    background: #2c7a2c;
 }
 
-/* ✅ 图标动画：购物车、搜索鼠标悬停旋转 */
-.icon {
-    display: inline-block;
-    transition: transform 0.3s ease;
-    font-size: 18px;
+/* 右侧栏 */
+.right-sidebar {
+    float: left;
+    width: 240px;
+    padding: 15px;
+    border: 1px solid #eee;
+    position: relative; /* 绝对定位参考 */
 }
-.icon:hover {
-    transform: rotate(360deg);
+.right-sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+.promo-item {
+    margin-bottom: 15px;
+    text-align: center;
+}
+.promo-img {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 5px;
+}
+.promo-item p {
+    color: #0d0d0d;
+    font-weight: bold;
+}
+.fixed-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background: rgb(234, 242, 128);
+    color: rgba(5, 5, 5, 0.92);
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 /* 页脚 */
 .footer {
     width: 100%;
-    height: 65px;
-    line-height: 65px;
+    height: 60px;
+    line-height: 60px;
     background: #333;
-    color: #fff;
+    color: white;
     text-align: center;
-    position: fixed;
+    position: fixed; /* 固定在底部 */
     bottom: 0;
     left: 0;
-    font-size: 15px;
 }
 
 /* 回到顶部按钮 */
 .back-top {
-    display: block;
+    display: none; /* 默认隐藏 */
     position: fixed;
     right: 50px;
-    bottom: 90px;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    bottom: 80px;
+    width: 100px;
+    height: 60px;
+    line-height: 60px;
     background: #2c7a2c;
     color: white;
     text-align: center;
-    border-radius: 50%;
-    font-size: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    transition: background 0.3s;
+    border-radius:50%;
 }
 .back-top:hover {
-    background: #236623;
+    background: #2c7a2c;
+}
+/* 滚动后显示回到顶部（可配合JS，这里先默认显示） */
+.back-top {
+    display: block;
 }
