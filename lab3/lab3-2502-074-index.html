@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字展销平台-春韵</title>
-    <!-- 引入CSS样式文件 -->
     <link rel="stylesheet" href="css/lab3-2502-074-index.css">
     <style>
         /* 登录弹窗样式 */
@@ -17,50 +16,69 @@
             height: 100%;
             background: rgba(0,0,0,0.5);
             z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .login-mask.show {
+            display: block;
+            opacity: 1;
         }
         .login-box {
-            width: 360px;
-            padding: 30px;
+            width: 380px;
+            padding: 35px;
             background: #fff;
-            border-radius: 8px;
+            border-radius: 10px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
         }
         .login-box h3 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #333;
+            font-size: 20px;
         }
         .login-box input {
             display: block;
             width: 100%;
-            height: 40px;
-            margin: 15px 0;
-            padding: 0 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            height: 44px;
+            margin: 16px 0;
+            padding: 0 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
         }
         .login-box .sub-btn {
             width: 100%;
-            height: 42px;
-            background: #2c7a2c; 
+            height: 46px;
+            background: linear-gradient(90deg, #2c7a2c, #34a834);
             color: #fff;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 17px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .login-box .sub-btn:hover {
+            background: linear-gradient(90deg, #236623, #2c7a2c);
+            transform: scale(1.05);
         }
         .close-btn {
             position: absolute;
-            right: 15px;
-            top: 10px;
+            right: 18px;
+            top: 12px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 22px;
+            color: #999;
+        }
+        .close-btn:hover {
+            color: #333;
         }
         /* 第三方登录样式 */
         .third-login {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
             font-size: 14px;
             color: #666;
@@ -68,12 +86,12 @@
         .third-icons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
+            gap: 25px;
+            margin-top: 12px;
         }
         .third-icon {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             display: block;
         }
         .third-icon img {
@@ -89,9 +107,10 @@
         /* 切换登录/注册 */
         .switch-btn {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 12px;
             color: #2c7a2c;
             cursor: pointer;
+            font-size: 15px;
         }
         /* 注册表单默认隐藏 */
         .register-form {
@@ -100,10 +119,10 @@
     </style>
 </head>
 <body>
-    <!-- 1. 头部区域：Logo + 导航菜单（浮动布局） -->
+    <!-- 1. 头部区域：Logo + 导航菜单（加入搜索、购物车图标） -->
     <header class="header">
         <div class="logo">
-            <img src="img/logo.png" alt="平台Logo" class="logo-img">
+            <img src="img/logo.png" alt="" class="logo-img">
             <span class="logo-text">数字展销平台</span>
         </div>
         <nav class="nav">
@@ -113,121 +132,126 @@
                 <li><a href="#">热门推荐</a></li>
                 <li><a href="#">新书上市</a></li>
                 <li><a href="#">关于我们</a></li>
-                <!-- 新增登录入口 -->
                 <li><a href="javascript:;" id="openLogin">登录</a></li>
+                <!-- 加入搜索、购物车图标，实现悬停旋转 -->
+                <li><a href="javascript:;" class="icon">🔍</a></li>
+                <li><a href="javascript:;" class="icon">🛒</a></li>
             </ul>
         </nav>
-        <!-- 清除浮动 -->
         <div class="clearfix"></div>
     </header>
 
-    <!-- 2. 主体内容区：三栏浮动布局 -->
-    <div class="container">
-        <!-- 左侧栏：图书分类导航（相对定位） -->
-        <aside class="left-sidebar">
-            <h3>图书分类</h3>
-            <ul>
-                <li><a href="#">文学小说</a></li>
-                <li><a href="#">科普读物</a></li>
-                <li><a href="#">经管励志</a></li>
-                <li><a href="#">生活艺术</a></li>
-                <li><a href="#">少儿读物</a></li>
-            </ul>
-            <!-- 相对定位的悬浮元素 -->
-            <div class="float-tip">
-                点击分类快速查找
-            </div>
-        </aside>
+<!-- 主体内容区：三栏布局 -->
+<div class="container">
+    <!-- 左侧栏：图书分类导航 -->
+    <aside class="left-sidebar">
+        <h3>图书分类</h3>
+        <ul>
+            <li><a href="#">文学小说</a></li>
+            <li><a href="#">科普读物</a></li>
+            <li><a href="#">经管励志</a></li>
+            <li><a href="#">生活艺术</a></li>
+            <li><a href="#">少儿读物</a></li>
+        </ul>
+    </aside>
 
-        <!-- 中间栏：图书展示区（盒子模型） -->
-        <main class="main-content">
-            <!-- 热门推荐（浮动排列） -->
-            <section class="hot-recommend">
-                <h2>热门推荐</h2>
-                <div class="book-list">
-                    <div class="book-item">
-                        <img src="img/book1.jpg" alt="图书1" class="book-img">
-                        <h4>《HTML5+CSS3网页设计基础与实战》</h4>
-                        <p>¥43.86</p>
-                    </div>
-                    <div class="book-item">
-                        <img src="img/book2.jpg" alt="图书2" class="book-img">
-                        <h4>《从一到无穷大》</h4>
-                        <p>¥55.10</p>
-                    </div>
-                    <div class="book-item">
-                        <img src="img/book3.jpg" alt="图书3" class="book-img">
-                        <h4>《人间草木》</h4>
-                        <p>¥22.40</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </section>
-
-            <!-- 新书上市（Table布局） -->
-            <section class="new-book">
-                <h2>新书上市</h2>
-                <table class="book-table">
-                    <thead>
-                        <tr>
-                            <th>图书名称</th>
-                            <th>作者</th>
-                            <th>价格</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>《活着》纪念版</td>
-                            <td>余华</td>
-                            <td>¥69.00</td>
-                            <td><a href="#" class="buy-btn">立即购买</a></td>
-                        </tr>
-                        <tr>
-                            <td>《OpenClaw“龙虾”安全养成实战》</td>
-                            <td>龚超</td>
-                            <td>¥39.80</td>
-                            <td><a href="#" class="buy-btn">立即购买</a></td>
-                        </tr>
-                        <tr>
-                            <td>《我的昆虫学入门书：无穷小亮讲昆虫》</td>
-                            <td>张辰亮</td>
-                            <td>¥59.80</td>
-                            <td><a href="#" class="buy-btn">立即购买</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
-
-        <!-- 右侧栏：促销信息 -->
-        <aside class="right-sidebar">
-            <h3>促销活动</h3>
-            <div class="promo-item">
-                <img src="img/promo1.jpg" alt="促销1" class="promo-img">
-                <p>满100减30</p>
-            </div>
-            <div class="promo-item">
-                <img src="img/promo2.jpg" alt="促销2" class="promo-img">
-                <p>新书8折</p>
-            </div>
-            <!-- 绝对定位元素 -->
-            <div class="fixed-badge">限时特惠</div>
-        </aside>
-
-        <div class="clearfix"></div>
+    <!-- 中间轮播栏（从下向上轮播） -->
+    <div class="banner">
+        <div class="banner-wrap">
+            <img src="img/banner1.png" alt="">
+            <img src="img/banner2.png" alt="banner2">
+            <img src="img/banner3.png" alt="banner3">
+        </div>
     </div>
 
-    <!-- 3. 页脚（固定定位） -->
+    <!-- 右侧栏：促销信息 -->
+    <aside class="right-sidebar">
+        <h3>促销活动</h3>
+        <div class="promo-item">
+            <img src="img/promo1.jpg" alt="促销1" class="promo-img">
+            <p>满100减30</p>
+        </div>
+        <div class="promo-item">
+            <img src="img/promo2.jpg" alt="促销2" class="promo-img">
+            <p>新书8折</p>
+        </div>
+        <div class="fixed-badge">限时特惠</div>
+    </aside>
+
+    <div class="clearfix"></div>
+
+    <!-- 下面的main-content -->
+    <main class="main-content">
+        <section class="hot-recommend">
+            <h2>热门推荐</h2>
+            <div class="book-list">
+                <div class="book-item">
+                    <img src="img/book1.jpg" alt="图书1" class="book-img">
+                    <h4>《HTML5+CSS3网页设计基础与实战》</h4>
+                    <p>¥43.86</p>
+                </div>
+                <div class="book-item">
+                    <img src="img/book2.jpg" alt="图书2" class="book-img">
+                    <h4>《从一到无穷大》</h4>
+                    <p>¥55.10</p>
+                </div>
+                <div class="book-item">
+                    <img src="img/book3.jpg" alt="图书3" class="book-img">
+                    <h4>《人间草木》</h4>
+                    <p>¥22.40</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </section>
+
+        <section class="new-book">
+            <h2>新书上市</h2>
+            <table class="book-table">
+                <thead>
+                    <tr>
+                        <th>图书名称</th>
+                        <th>作者</th>
+                        <th>价格</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>《活着》纪念版</td>
+                        <td>余华</td>
+                        <td>¥69.00</td>
+                        <td><a href="#" class="buy-btn">立即购买</a></td>
+                    </tr>
+                    <tr>
+                        <td>《OpenClaw“龙虾”安全养成实战》</td>
+                        <td>龚超</td>
+                        <td>¥39.80</td>
+                        <td><a href="#" class="buy-btn">立即购买</a></td>
+                    </tr>
+                    <tr>
+                        <td>《我的昆虫学入门书：无穷小亮讲昆虫》</td>
+                        <td>张辰亮</td>
+                        <td>¥59.80</td>
+                        <td><a href="#" class="buy-btn">立即购买</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <div class="clearfix"></div>
+</div>
+
+    <!-- 页脚 -->
     <footer class="footer">
-        <p>© 2026 数字展销平台</p>
+        <p>© 2026 数字展销平台 版权所有</p>
     </footer>
 
-    <!-- 回到顶部按钮（固定定位 + 悬停显示隐藏） -->
-    <a href="#" class="back-top">回到顶部</a>
+    <!-- 回到顶部按钮 -->
+    <a href="#" class="back-top">回到顶</a>
 
 
-    <!-- ========== 新增：登录+注册弹窗表单 ========== -->
+    <!-- 登录+注册弹窗表单 -->
     <div class="login-mask" id="loginMask">
         <div class="login-box">
             <span class="close-btn" id="closeLogin">×</span>
@@ -259,7 +283,7 @@
                 </div>
             </div>
 
-            <!-- 注册表单（默认隐藏） -->
+            <!-- 注册表单 -->
             <div class="register-form" id="registerForm">
                 <h3>用户注册</h3>
                 <form id="registerFormEle">
@@ -274,15 +298,15 @@
     </div>
 
     <script>
-        // 1. 打开/关闭弹窗
+        // 1. 打开/关闭弹窗（淡入淡出）
         document.getElementById('openLogin').onclick = function(){
-            document.getElementById('loginMask').style.display = 'block';
+            document.getElementById('loginMask').classList.add('show');
         }
         document.getElementById('closeLogin').onclick = function(){
-            document.getElementById('loginMask').style.display = 'none';
+            document.getElementById('loginMask').classList.remove('show');
         }
 
-        // 2. 登录/注册表单切换（显示/隐藏）
+        // 2. 登录/注册表单切换
         document.getElementById('toRegister').onclick = function(){
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
@@ -292,9 +316,9 @@
             document.getElementById('loginForm').style.display = 'block';
         }
 
-        // 3. 注册功能：保存用户信息到localStorage
+        // 3. 注册功能
         document.getElementById('registerFormEle').onsubmit = function(e){
-            e.preventDefault(); // 阻止表单默认跳转
+            e.preventDefault();
             let username = this.username.value;
             let pwd = this.pwd.value;
             let repwd = this.repwd.value;
@@ -308,26 +332,23 @@
                 return;
             }
 
-            // 保存账号密码到本地存储
             localStorage.setItem(username, pwd);
             alert('注册成功！请登录');
-            // 自动切换回登录表单
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('loginForm').style.display = 'block';
             this.reset();
         }
 
-        // 4. 登录功能：读取localStorage比对验证
+        // 4. 登录功能
         document.getElementById('loginFormEle').onsubmit = function(e){
-            e.preventDefault(); // 阻止表单默认跳转
+            e.preventDefault();
             let username = this.username.value;
             let pwd = this.pwd.value;
 
-            // 从本地存储读取密码
             let savedPwd = localStorage.getItem(username);
             if(savedPwd && savedPwd === pwd){
                 alert('登录成功！欢迎回来，' + username);
-                document.getElementById('loginMask').style.display = 'none';
+                document.getElementById('loginMask').classList.remove('show');
                 this.reset();
             }else{
                 alert('账号或密码错误！');
@@ -339,7 +360,7 @@
             icon.onclick = function() {
                 let type = this.title;
                 alert(`正在调用${type}...（作业模拟实现）`);
-                document.getElementById('loginMask').style.display = 'none';
+                document.getElementById('loginMask').classList.remove('show');
                 alert(`${type}登录成功！`);
             }
         });
