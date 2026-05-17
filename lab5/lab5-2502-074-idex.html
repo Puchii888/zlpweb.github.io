@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字展销平台-春韵</title>
+    <!-- 外部CSS文件引入 -->
+    <link rel="stylesheet" href="css/lab5-2502-074-index.css">
+</head>
+
+<body>
+    <!-- ======================================
+         1. 头部区域：Logo + 导航栏
+     ====================================== -->
+    <header class="header">
+        <div class="logo">
+            <img src="img/logo.png" alt="" class="logo-img">
+            <span class="logo-text">数字展销平台</span>
+        </div>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">图书分类</a></li>
+                <li><a href="#">热门推荐</a></li>
+                <li><a href="#">新书上市</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="javascript:;" id="openLogin" class="login-nav-btn">登录</a></li>
+                <li><a href="javascript:;" class="icon">🔍</a></li>
+                <li><a href="javascript:;" class="icon">🛒</a></li>
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+    <!-- ======================================
+         2. 主体三栏布局：分类 + 轮播 + 促销
+     ====================================== -->
+    <div class="container">
+        <!-- 左侧图书分类 -->
+        <aside class="left-sidebar">
+            <h3>图书分类</h3>
+            <ul>
+                <li><a href="#">文学小说</a></li>
+                <li><a href="#">科普读物</a></li>
+                <li><a href="#">经管励志</a></li>
+                <li><a href="#">生活艺术</a></li>
+                <li><a href="#">少儿读物</a></li>
+            </ul>
+        </aside>
+
+        <!-- 中间轮播图 -->
+        <div class="banner">
+            <div class="banner-wrap">
+                <img src="img/banner1.png" alt="">
+                <img src="img/banner2.png" alt="banner2">
+                <img src="img/banner3.png" alt="banner3">
+            </div>
+        </div>
+
+        <!-- 右侧促销栏 -->
+        <aside class="right-sidebar">
+            <h3>促销活动</h3>
+            <div class="promo-item">
+                <img src="img/promo1.jpg" alt="促销1" class="promo-img">
+                <p>满100减30</p>
+            </div>
+            <div class="promo-item">
+                <img src="img/promo2.jpg" alt="促销2" class="promo-img">
+                <p>新书8折</p>
+            </div>
+            <div class="fixed-badge">限时特惠</div>
+        </aside>
+        <div class="clearfix"></div>
+    </div>
+
+    <!-- ======================================
+         3. 主要内容区：推荐 + 抢购 + 新书
+     ====================================== -->
+    <main class="main-content">
+        <!-- 热门推荐 -->
+        <section class="hot-recommend">
+            <h2>热门推荐</h2>
+            <div class="book-list">
+                <div class="book-item">
+                    <div class="card">
+                        <div class="front">
+                            <img src="img/book1.jpg" alt="图书1" class="book-img">
+                            <h4>《HTML5+CSS3网页设计基础与实战》</h4>
+                        </div>
+                        <div class="back">
+                            <h4>《HTML5+CSS3网页设计基础与实战》</h4>
+                            <p class="price">¥43.86</p>
+                            <p class="rating">评分: 4.8/5</p>
+                            <p class="description">本书详细介绍了HTML5和CSS3的新特性，帮助读者掌握现代网页设计技巧。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="card">
+                        <div class="front">
+                            <img src="img/book2.jpg" alt="图书2" class="book-img">
+                            <h4>《从一到无穷大》</h4>
+                        </div>
+                        <div class="back">
+                            <h4>《从一到无穷大》</h4>
+                            <p class="price">¥55.10</p>
+                            <p class="rating">评分: 4.9/5</p>
+                            <p class="description">乔治·伽莫夫科普名著，带领读者探索数学和科学的奥秘。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="card">
+                        <div class="front">
+                            <img src="img/book3.jpg" alt="图书3" class="book-img">
+                            <h4>《人间草木》</h4>
+                        </div>
+                        <div class="back">
+                            <h4>《人间草木》</h4>
+                            <p class="price">¥22.40</p>
+                            <p class="rating">评分: 4.7/5</p>
+                            <p class="description">汪曾祺散文集，描绘自然与人生的美好瞬间。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </section>
+
+        <!-- ======================
+             🔥 抢购区（3D旋转）
+         ====================== -->
+        <section class="rush-buy">
+            <h2>抢购</h2>
+            <div class="ring-box">
+                <div class="ring-inner">
+                    <div class="ring-item"><img src="img/book4.jpg"></div>
+                    <div class="ring-item"><img src="img/book5.jpg"></div>
+                    <div class="ring-item"><img src="img/book6.jpg"></div>
+                    <div class="ring-item"><img src="img/book7.jpg"></div>
+                    <div class="ring-item"><img src="img/book8.jpg"></div>
+                    <div class="ring-item"><img src="img/book9.jpg"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 新书上市 -->
+        <section class="new-book">
+            <h2>新书上市</h2>
+            <table class="book-table">
+                <thead>
+                    <tr>
+                        <th>图书名称</th>
+                        <th>作者</th>
+                        <th>价格</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>《活着》纪念版</td>
+                        <td>余华</td>
+                        <td>¥69.00</td>
+                        <td><a href="#" class="buy-btn">立即购买</a></td>
+                    </tr>
+                    <tr>
+                        <td>《OpenClaw“龙虾”安全养成实战》</td>
+                        <td>龚超</td>
+                        <td>¥39.80</td>
+                        <td><a href="#" class="buy-btn">立即购买</a></td>
+                    </tr>
+                    <tr>
+                        <td>《我的昆虫学入门书：无穷小亮讲昆虫》</td>
+                        <td>张辰亮</td>
+                        <td>¥59.80</td>
+                        <td><a href="#" class="buy-btn">立即购买</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- ======================================
+         4. 页脚 + 回到顶部
+     ====================================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2026 数字展销平台 </p>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><img src="img/wx.jpg" alt="微信"></a>
+                <a href="#" class="social-icon"><img src="img/QQ.jpg" alt="QQ"></a>
+                <a href="#" class="social-icon"><img src="img/wb.jpg" alt="微博"></a>
+                <a href="#" class="social-icon"><img src="img/blbl.jpg" alt=""></a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-top" id="backTop">回到顶</a>
+
+    <!-- ======================================
+         5. 登录注册弹窗
+     ====================================== -->
+    <div class="login-mask" id="loginMask">
+        <div class="login-box">
+            <span class="close-btn" id="closeLogin">×</span>
+            
+            <div class="login-form" id="loginForm">
+                <h3>用户登录</h3>
+                <form id="loginFormEle">
+                    <input type="text" name="username" placeholder="请输入账号" required>
+                    <input type="password" name="pwd" placeholder="请输入密码" required>
+                    <input type="submit" value="立即登录" class="sub-btn">
+                </form>
+                <p class="switch-btn" id="toRegister">没有账号？去注册</p>
+
+                <div class="third-login">
+                    <p>其他登录方式：</p>
+                    <div class="third-icons">
+                        <a href="javascript:;" class="third-icon" title="微信登录"><img src="img/wx.jpg" alt="微信"></a>
+                        <a href="javascript:;" class="third-icon" title="支付宝登录"><img src="img/zfb.jpg" alt="支付宝"></a>
+                        <a href="javascript:;" class="third-icon" title="QQ登录"><img src="img/QQ.jpg" alt="QQ"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="register-form" id="registerForm">
+                <h3>用户注册</h3>
+                <form id="registerFormEle">
+                    <input type="text" name="username" placeholder="请设置账号" required>
+                    <input type="password" name="pwd" placeholder="请设置密码" required>
+                    <input type="password" name="repwd" placeholder="请确认密码" required>
+                    <input type="submit" value="立即注册" class="sub-btn">
+                </form>
+                <p class="switch-btn" id="toLogin">已有账号？去登录</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS 脚本 -->
+    <script src="js/script.js"></script>
+</body>
+</html>
